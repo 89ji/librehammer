@@ -10,10 +10,17 @@ config_version=5
 
 [application]
 
-config/name="librehammer"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/name="LibreHammer"
+run/main_scene="uid://cr5cixwm62wlw"
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="librehammer"
+
+[layer_names]
+
+3d_physics/layer_1="Unit Models"
+3d_physics/layer_2="Structures"
+3d_physics/layer_3="Vision"

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bs515nok7sxst"]
+
+[ext_resource type="Script" uid="uid://gkjl8vc2m1pt" path="res://Components/Troop/GameTroop.cs" id="1_ul6fe"]
+[ext_resource type="Material" uid="uid://mgcdr0ptsob5" path="res://Materials/Attacker.tres" id="2_l40ji"]
+[ext_resource type="Material" uid="uid://cgjr0a588ther" path="res://Materials/Neutral.tres" id="2_rbepj"]
+[ext_resource type="Material" uid="uid://cp4jbee3xfxlc" path="res://Materials/Defender.tres" id="3_x6air"]
+[ext_resource type="Texture2D" uid="uid://rgjo2knkck75" path="res://icon.svg" id="5_x6air"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d5xec"]
+material = ExtResource("2_rbepj")
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l40ji"]
+height = 3.0
+radius = 1.0
+
+[node name="Troop" type="Node3D" node_paths=PackedStringArray("Base", "Hitbox", "Image")]
+script = ExtResource("1_ul6fe")
+Base = NodePath("Base")
+Hitbox = NodePath("Hitbox")
+AttackColor = ExtResource("2_l40ji")
+DefenseColor = ExtResource("3_x6air")
+Image = NodePath("Image")
+
+[node name="Base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+mesh = SubResource("CylinderMesh_d5xec")
+
+[node name="Hitbox" type="Area3D" parent="."]
+
+[node name="Shape" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_l40ji")
+
+[node name="Image" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+billboard = 2
+transparent = false
+shaded = true
+texture = ExtResource("5_x6air")
+
+[node name="TroopLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+visible = false
+light_color = Color(1, 0, 0, 1)
+omni_attenuation = 5.0

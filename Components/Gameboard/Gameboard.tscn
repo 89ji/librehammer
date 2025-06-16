@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://dd1mqfgn4c516"]
+
+[ext_resource type="Script" uid="uid://drv0nn144yk3r" path="res://Components/Gameboard/Gameboard.cs" id="1_rltof"]
+[ext_resource type="PackedScene" uid="uid://2a6nnrfibccv" path="res://Components/Phase Clock/TurnClock.tscn" id="2_0dao1"]
+[ext_resource type="PackedScene" uid="uid://bs515nok7sxst" path="res://Components/Troop/Troop.tscn" id="2_46b28"]
+[ext_resource type="PackedScene" uid="uid://by8n5x1a7fl0s" path="res://Components/Next Phase Button/NextPhaseButton.tscn" id="2_kv0md"]
+[ext_resource type="PackedScene" uid="uid://cacp5vhvhcpkc" path="res://Components/Deployments/DeployTemplate.tscn" id="3_46b28"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0dao1"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_kv0md"]
+sky_material = SubResource("ProceduralSkyMaterial_0dao1")
+
+[sub_resource type="Environment" id="Environment_rltof"]
+background_mode = 2
+sky = SubResource("Sky_kv0md")
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1pekv"]
+size = Vector3(60, 0.5, 44)
+
+[node name="Gameboard" type="Node3D" node_paths=PackedStringArray("TroopGroup", "deployTemplate", "turnIndicator")]
+script = ExtResource("1_rltof")
+Gametroop = ExtResource("2_46b28")
+TroopGroup = NodePath("Troop Group")
+deployTemplate = NodePath("DeployTemplate")
+turnIndicator = NodePath("UI/TurnClock")
+
+[node name="DeployTemplate" parent="." instance=ExtResource("3_46b28")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rltof")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.769693, 0.366841, 0.522495, -0.637611, 0.400686, 0.657954, 0.0320081, -0.839571, 0.542307, 0, 15.1058, 0)
+light_energy = 0.5
+
+[node name="Floor Hitbox" type="StaticBody3D" parent="."]
+
+[node name="Floor Shape" type="CollisionShape3D" parent="Floor Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_1pekv")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="NextPhaseButton" parent="UI" instance=ExtResource("2_kv0md")]
+
+[node name="TurnClock" parent="UI" instance=ExtResource("2_0dao1")]
+
+[node name="Troop Group" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="UI/NextPhaseButton" to="." method="NextPhase"]

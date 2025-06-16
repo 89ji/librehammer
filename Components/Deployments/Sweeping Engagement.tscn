@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://bt73lhipqly8"]
+
+[ext_resource type="Material" uid="uid://cgjr0a588ther" path="res://Materials/Neutral.tres" id="1_a2wd4"]
+[ext_resource type="PackedScene" uid="uid://clshihwqo45e8" path="res://Components/Control Point/ControlPoint.tscn" id="2_al1j3"]
+[ext_resource type="Shape3D" uid="uid://gkjo7clestfm" path="res://Components/Deployments/SE Triangle.tres" id="3_al1j3"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uxve4"]
+size = Vector3(60, 0.5, 44)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jfhhh"]
+points = PackedVector3Array(30, 0, 22, 30, 0, 0, -30, 0, 0, 30, 5, 22, 30, 5, 0, -30, 5, 0)
+
+[node name="DeployTemplate" type="Node3D"]
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = ExtResource("1_a2wd4")
+mesh = SubResource("BoxMesh_uxve4")
+metadata/_edit_lock_ = true
+
+[node name="Control Points" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CP1" parent="Control Points" instance=ExtResource("2_al1j3")]
+
+[node name="CP2" parent="Control Points" instance=ExtResource("2_al1j3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 8)
+
+[node name="CP3" parent="Control Points" instance=ExtResource("2_al1j3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -8)
+
+[node name="CP4" parent="Control Points" instance=ExtResource("2_al1j3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -16)
+
+[node name="CP5" parent="Control Points" instance=ExtResource("2_al1j3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 16)
+
+[node name="Defender Area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Defender Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22)
+shape = ExtResource("3_al1j3")
+debug_color = Color(0.744991, 0.223239, 0.109422, 1)
+
+[node name="Attacker Area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attacker Area"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, -1, 0, 5, 22)
+shape = SubResource("ConvexPolygonShape3D_jfhhh")
+debug_color = Color(0.352697, 0.545174, 0.674632, 1)

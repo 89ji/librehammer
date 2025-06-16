@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://vmjmyw0k7xqi"]
+
+[ext_resource type="Material" uid="uid://cgjr0a588ther" path="res://Materials/Neutral.tres" id="1_3f7bt"]
+[ext_resource type="PackedScene" uid="uid://clshihwqo45e8" path="res://Components/Control Point/ControlPoint.tscn" id="2_iumrr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uxve4"]
+size = Vector3(60, 0.5, 44)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a6mgx"]
+size = Vector3(18, 5, 44)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ub37w"]
+size = Vector3(18, 5, 44)
+
+[node name="DeployTemplate" type="Node3D"]
+metadata/_edit_lock_ = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+material_override = ExtResource("1_3f7bt")
+mesh = SubResource("BoxMesh_uxve4")
+metadata/_edit_lock_ = true
+
+[node name="Control Points" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="CP1" parent="Control Points" instance=ExtResource("2_iumrr")]
+
+[node name="CP2" parent="Control Points" instance=ExtResource("2_iumrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.9814, -0.0270348, 0.0506897)
+
+[node name="CP3" parent="Control Points" instance=ExtResource("2_iumrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 0)
+
+[node name="CP4" parent="Control Points" instance=ExtResource("2_iumrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+
+[node name="CP5" parent="Control Points" instance=ExtResource("2_iumrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="Defender Area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Defender Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 2.5, 0)
+shape = SubResource("BoxShape3D_a6mgx")
+debug_color = Color(0.744991, 0.223239, 0.109422, 1)
+
+[node name="Attacker Area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attacker Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2.5, 0)
+shape = SubResource("BoxShape3D_ub37w")
+debug_color = Color(0.352697, 0.545174, 0.674632, 1)

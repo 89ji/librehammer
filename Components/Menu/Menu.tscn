@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr5cixwm62wlw"]
+
+[ext_resource type="Script" uid="uid://b4i23ta1rg8to" path="res://Components/Menu/Menu.cs" id="1_vhyyr"]
+[ext_resource type="PackedScene" uid="uid://dd1mqfgn4c516" path="res://Components/Gameboard/Gameboard.tscn" id="2_pitro"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vhyyr")
+Gameboard = ExtResource("2_pitro")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -15.5
+offset_right = 48.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Game"
+
+[connection signal="pressed" from="Button" to="." method="LoadGame"]
