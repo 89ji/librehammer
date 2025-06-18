@@ -10,9 +10,11 @@ public partial class ScoreBanner : Control
 	[Export] RichTextLabel DefCP;
 	[Export] RichTextLabel AtkVP;
 	[Export] RichTextLabel AtkCP;
+	[Export] Gameboard board;
 
 	public override void _Process(double delta)
 	{
+		var State = board.State;
 		if (State != null)
 		{
 			if (State.Player1.isDefender)

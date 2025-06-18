@@ -1,76 +1,81 @@
-[gd_scene load_steps=9 format=3 uid="uid://2a6nnrfibccv"]
+[gd_scene load_steps=8 format=3 uid="uid://2a6nnrfibccv"]
 
 [ext_resource type="Texture2D" uid="uid://cesfhqsqnfol3" path="res://Components/Phase Clock/charge.png" id="1_1korp"]
-[ext_resource type="Material" uid="uid://mgcdr0ptsob5" path="res://Materials/Attacker.tres" id="1_4vvbw"]
 [ext_resource type="Script" uid="uid://buwtpag0odt44" path="res://Components/Phase Clock/TurnClock.cs" id="1_evwnh"]
 [ext_resource type="Texture2D" uid="uid://dcul2w820qhqn" path="res://Components/Phase Clock/cmd.png" id="2_4vvbw"]
 [ext_resource type="Texture2D" uid="uid://c1ywmxplnrvrl" path="res://Components/Phase Clock/fight.png" id="3_evwnh"]
 [ext_resource type="Texture2D" uid="uid://b23rpyrhdshne" path="res://Components/Phase Clock/move.png" id="4_hing2"]
 [ext_resource type="Texture2D" uid="uid://dxyi1bp6d74bc" path="res://Components/Phase Clock/shoot.png" id="5_kqipe"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_evwnh"]
-lightmap_size_hint = Vector2i(7, 7)
-material = ExtResource("1_4vvbw")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vvbw"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 0.384314)
+corner_radius_top_right = 12
+corner_detail = 12
 
-[node name="TurnClock" type="Control" node_paths=PackedStringArray("cmd", "move", "shoot", "charge", "fight", "color", "text")]
+[node name="TurnClock" type="Control" node_paths=PackedStringArray("cmd", "move", "shoot", "charge", "fight", "panel", "text")]
 layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 script = ExtResource("1_evwnh")
-cmd = NodePath("Cmd")
-move = NodePath("Move")
-shoot = NodePath("Shoot")
-charge = NodePath("Charge")
-fight = NodePath("Fight")
-color = NodePath("Color Accent")
-text = NodePath("RichTextLabel")
+cmd = NodePath("Node2D/Cmd")
+move = NodePath("Node2D/Move")
+shoot = NodePath("Node2D/Shoot")
+charge = NodePath("Node2D/Charge")
+fight = NodePath("Node2D/Fight")
+panel = NodePath("Panel")
+text = NodePath("Panel/RichTextLabel")
 Defender = Color(0.737163, 0.231067, 0.231067, 1)
 Attacker = Color(0.356619, 0.478248, 0.545174, 1)
 
-[node name="Color Accent" type="MeshInstance2D" parent="."]
-modulate = Color(0.737163, 0.231067, 0.231067, 1)
-position = Vector2(170, -40)
-scale = Vector2(340, 80)
-mesh = SubResource("QuadMesh_evwnh")
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -74.0
+offset_right = 340.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4vvbw")
 
-[node name="Cmd" type="Sprite2D" parent="."]
-position = Vector2(40, -40)
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 2.0
+offset_right = 207.0
+offset_bottom = 70.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+text = "x's y Phase
+Turn 1"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(37, -36)
+
+[node name="Cmd" type="Sprite2D" parent="Node2D"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_4vvbw")
 
-[node name="Move" type="Sprite2D" parent="."]
+[node name="Move" type="Sprite2D" parent="Node2D"]
 visible = false
-position = Vector2(40, -40)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_hing2")
 
-[node name="Shoot" type="Sprite2D" parent="."]
+[node name="Shoot" type="Sprite2D" parent="Node2D"]
 visible = false
-position = Vector2(40, -40)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_kqipe")
 
-[node name="Charge" type="Sprite2D" parent="."]
+[node name="Charge" type="Sprite2D" parent="Node2D"]
 visible = false
-position = Vector2(40, -40)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_1korp")
 
-[node name="Fight" type="Sprite2D" parent="."]
+[node name="Fight" type="Sprite2D" parent="Node2D"]
 visible = false
-position = Vector2(40, -40)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_evwnh")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 86.0
-offset_top = -78.0
-offset_right = 561.0
-offset_bottom = -9.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 24
-text = "x's Command Phase
-Turn 1"

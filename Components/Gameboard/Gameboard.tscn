@@ -24,8 +24,7 @@ sky_material = SubResource("ProceduralSkyMaterial_0dao1")
 [sub_resource type="Environment" id="Environment_rltof"]
 background_mode = 2
 sky = SubResource("Sky_kv0md")
-tonemap_mode = 2
-sdfgi_enabled = true
+tonemap_mode = 4
 sdfgi_use_occlusion = true
 glow_enabled = true
 volumetric_fog_enabled = true
@@ -34,13 +33,11 @@ volumetric_fog_density = 0.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_1pekv"]
 size = Vector3(60, 0.5, 44)
 
-[node name="Gameboard" type="Node3D" node_paths=PackedStringArray("TroopGroup", "deployTemplate", "turnIndicator", "scoreBanner")]
+[node name="Gameboard" type="Node3D" node_paths=PackedStringArray("TroopGroup", "deployTemplate")]
 script = ExtResource("1_rltof")
 Gametroop = ExtResource("2_46b28")
 TroopGroup = NodePath("Troop Group")
 deployTemplate = NodePath("DeployTemplate")
-turnIndicator = NodePath("UI/TurnClock")
-scoreBanner = NodePath("UI/ScoreBanner")
 
 [node name="Camera" parent="." instance=ExtResource("3_ys33f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
@@ -57,7 +54,7 @@ environment = SubResource("Environment_rltof")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.769693, 0.366841, 0.522495, -0.637611, 0.400686, 0.657954, 0.0320081, -0.839571, 0.542307, 0, 15.1058, 0)
-light_energy = 0.1
+light_energy = 0.5
 light_indirect_energy = 0.5
 
 [node name="Floor Hitbox" type="StaticBody3D" parent="."]
@@ -68,11 +65,15 @@ shape = SubResource("BoxShape3D_1pekv")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ScoreBanner" parent="UI" instance=ExtResource("4_4g1ay")]
+[node name="ScoreBanner" parent="UI" node_paths=PackedStringArray("board") instance=ExtResource("4_4g1ay")]
+board = NodePath("../..")
 
 [node name="NextPhaseButton" parent="UI" instance=ExtResource("2_kv0md")]
 
-[node name="TurnClock" parent="UI" instance=ExtResource("2_0dao1")]
+[node name="TurnClock" parent="UI" node_paths=PackedStringArray("board") instance=ExtResource("2_0dao1")]
+board = NodePath("../..")
+Defender = Color(0.611612, 0.191974, 0.184161, 1)
+Attacker = Color(0.223239, 0.360525, 0.470436, 1)
 
 [node name="Troop Group" type="Node3D" parent="."]
 metadata/_edit_lock_ = true

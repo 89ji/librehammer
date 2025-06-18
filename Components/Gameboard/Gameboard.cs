@@ -18,8 +18,6 @@ public partial class Gameboard : Node3D
 	[ExportGroup("Internal References")]
 	[Export] Node3D TroopGroup;
 	[Export] DeployTemplate deployTemplate;
-	[Export] TurnClock turnIndicator;
-	[Export] ScoreBanner scoreBanner;
 
 
 	public Gamestate State = new();
@@ -68,8 +66,6 @@ public partial class Gameboard : Node3D
 			State.Objective[idx] = lhcap;
 		}
 
-		scoreBanner.State = State;
-
 		var chooser = State.GetChoosingPlayer();
 		State.ChooseRole(true);
 		NextPhase();
@@ -79,7 +75,6 @@ public partial class Gameboard : Node3D
 	void NextPhase()
 	{
 		State.PhaseMan.NextPhase();
-		turnIndicator.ShowInfo(State.PhaseMan.ActivePlayer, State.PhaseMan.CurrentPhase, State.PhaseMan.Turn);
 
 		foreach (var obj in State.Objective)
 		{

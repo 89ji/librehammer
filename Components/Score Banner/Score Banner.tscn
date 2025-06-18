@@ -1,14 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd8aeqe02ixfg"]
+[gd_scene load_steps=5 format=3 uid="uid://bd8aeqe02ixfg"]
 
 [ext_resource type="Script" uid="uid://crai1thpkyicu" path="res://Components/Score Banner/ScoreBanner.cs" id="1_s1nxb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_e60g3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1nxb"]
+bg_color = Color(0.611612, 0.191974, 0.184161, 1)
+corner_radius_bottom_left = 12
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqxex"]
+bg_color = Color(0.223239, 0.360525, 0.470436, 1)
+corner_radius_bottom_right = 12
 
 [node name="ScoreBanner" type="Control" node_paths=PackedStringArray("DefVP", "DefCP", "AtkVP", "AtkCP")]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
+offset_top = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 script = ExtResource("1_s1nxb")
 DefVP = NodePath("Def VP/RichTextLabel3")
@@ -99,11 +110,13 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Def Bkg" type="MeshInstance2D" parent="Def VP"]
-modulate = Color(0.611612, 0.191974, 0.184161, 1)
-position = Vector2(-108, 44)
-scale = Vector2(72, 72)
-mesh = SubResource("BoxMesh_e60g3")
+[node name="Panel" type="Panel" parent="Def VP"]
+layout_mode = 0
+offset_left = -144.0
+offset_top = 8.0
+offset_right = -72.0
+offset_bottom = 80.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s1nxb")
 
 [node name="cp" type="RichTextLabel" parent="Def VP"]
 layout_mode = 0
@@ -133,11 +146,13 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Atk Bkg" type="MeshInstance2D" parent="atk vp"]
-modulate = Color(0.223239, 0.360525, 0.470436, 1)
-position = Vector2(108, 44)
-scale = Vector2(72, 72)
-mesh = SubResource("BoxMesh_e60g3")
+[node name="Panel" type="Panel" parent="atk vp"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 80.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uqxex")
 
 [node name="cp" type="RichTextLabel" parent="atk vp"]
 layout_mode = 0

@@ -9,10 +9,11 @@ maxFov = 100
 fovAdjustInterval = 1.0
 camera = NodePath("Camera3D")
 ray = NodePath("RayCast3D")
-xSpeed = 5.0
-ySpeed = 5.0
+xSpeed = 3.5
+ySpeed = 3.5
 
 [node name="Camera3D" type="Camera3D" parent="."]
+fov = 80.0
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

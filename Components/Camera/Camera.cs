@@ -73,8 +73,17 @@ public partial class Camera : Marker3D
 	{
 		if (vent is InputEventMouseButton mouse)
 		{
+			/*
 			if (mouse.ButtonIndex == MouseButton.WheelDown) camera.Fov = (camera.Fov + fovAdjustInterval <= maxFov) ? camera.Fov + fovAdjustInterval : maxFov;
 			else if (mouse.ButtonIndex == MouseButton.WheelUp) camera.Fov = (camera.Fov - fovAdjustInterval >= minFov) ? camera.Fov - fovAdjustInterval : minFov;
+			*/
+
+			if (mouse.ButtonIndex == MouseButton.WheelDown) Translate(new(0, -.25f * fovAdjustInterval, 0));
+			else if (mouse.ButtonIndex == MouseButton.WheelUp) Translate(new(0, .25f * fovAdjustInterval, 0));
+
+			if (Position.Y < 1) Position = new(Position.X, 1, Position.Z);
+			if (Position.Y > 20) Position = new(Position.X, 20, Position.Z);
+
 		}
 
 		if (Input.IsActionPressed("move_camera") && vent is InputEventMouseMotion motion)
