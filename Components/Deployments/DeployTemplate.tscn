@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://cacp5vhvhcpkc"]
+[gd_scene load_steps=12 format=3 uid="uid://cacp5vhvhcpkc"]
 
 [ext_resource type="Script" uid="uid://dcfsi4xx4mneq" path="res://Components/Deployments/DeployTemplate.cs" id="1_a6mgx"]
-[ext_resource type="Material" uid="uid://cgjr0a588ther" path="res://Materials/Neutral.tres" id="1_w2xrc"]
 [ext_resource type="PackedScene" uid="uid://c60pkqnoc7oin" path="res://Components/Deployments/Dawn of War.tscn" id="2_jwg1u"]
 [ext_resource type="PackedScene" uid="uid://clshihwqo45e8" path="res://Components/Control Point/ControlPoint.tscn" id="2_uxve4"]
 [ext_resource type="PackedScene" uid="uid://vmjmyw0k7xqi" path="res://Components/Deployments/Hammer and Anvil.tscn" id="3_3mama"]
 [ext_resource type="PackedScene" uid="uid://bt73lhipqly8" path="res://Components/Deployments/Sweeping Engagement.tscn" id="4_vg3mx"]
+[ext_resource type="Material" uid="uid://bjs1e0kvl7sqp" path="res://Materials/Degraded Concrete/Degraded Concrete.tres" id="5_jwg1u"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_uxve4"]
+material = ExtResource("5_jwg1u")
 size = Vector3(60, 0.5, 44)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_a6mgx"]
@@ -15,6 +16,14 @@ size = Vector3(18, 5, 44)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ub37w"]
 size = Vector3(18, 5, 44)
+
+[sub_resource type="FogMaterial" id="FogMaterial_jwg1u"]
+density = 0.1
+albedo = Color(0.223239, 0.360525, 0.470436, 1)
+
+[sub_resource type="FogMaterial" id="FogMaterial_3mama"]
+density = 0.1
+albedo = Color(0.611612, 0.191974, 0.184161, 1)
 
 [node name="DeployTemplate" type="Node3D"]
 script = ExtResource("1_a6mgx")
@@ -25,7 +34,7 @@ metadata/_edit_lock_ = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-material_override = ExtResource("1_w2xrc")
+visible = false
 mesh = SubResource("BoxMesh_uxve4")
 metadata/_edit_lock_ = true
 
@@ -59,3 +68,13 @@ debug_color = Color(0.744991, 0.223239, 0.109422, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2.5, 0)
 shape = SubResource("BoxShape3D_ub37w")
 debug_color = Color(0.352697, 0.545174, 0.674632, 1)
+
+[node name="Blu" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 2, 0)
+size = Vector3(18, 6, 44)
+material = SubResource("FogMaterial_jwg1u")
+
+[node name="Red" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 2, 0)
+size = Vector3(18, 6, 44)
+material = SubResource("FogMaterial_3mama")

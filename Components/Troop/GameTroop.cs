@@ -25,7 +25,8 @@ public partial class GameTroop : Node3D
 		newshape.TopRadius = BaseRadius;
 		newshape.BottomRadius = BaseRadius;
 		newshape.Height = .25f;
-		newshape.Material = Troop.Owner.isDefender ? DefenseColor : AttackColor;
+		// newshape.Material = Troop.Owner.isDefender ? DefenseColor : AttackColor;
+		Base.MaterialOverride = Troop.Owner.isDefender ? DefenseColor : AttackColor;
 		Base.Mesh = newshape;
 
 		// Editing the height of the hitbox

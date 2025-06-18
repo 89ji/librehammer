@@ -1,13 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bs515nok7sxst"]
+[gd_scene load_steps=7 format=3 uid="uid://bs515nok7sxst"]
 
 [ext_resource type="Script" uid="uid://gkjl8vc2m1pt" path="res://Components/Troop/GameTroop.cs" id="1_ul6fe"]
 [ext_resource type="Material" uid="uid://mgcdr0ptsob5" path="res://Materials/Attacker.tres" id="2_l40ji"]
-[ext_resource type="Material" uid="uid://cgjr0a588ther" path="res://Materials/Neutral.tres" id="2_rbepj"]
 [ext_resource type="Material" uid="uid://cp4jbee3xfxlc" path="res://Materials/Defender.tres" id="3_x6air"]
 [ext_resource type="Texture2D" uid="uid://rgjo2knkck75" path="res://icon.svg" id="5_x6air"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_d5xec"]
-material = ExtResource("2_rbepj")
 top_radius = 1.0
 bottom_radius = 1.0
 height = 0.25
@@ -16,7 +14,7 @@ height = 0.25
 height = 3.0
 radius = 1.0
 
-[node name="Troop" type="Node3D" node_paths=PackedStringArray("Base", "Hitbox", "Image")]
+[node name="Troop" type="Node3D" node_paths=PackedStringArray("Base", "Hitbox", "Image") groups=["Troop"]]
 script = ExtResource("1_ul6fe")
 Base = NodePath("Base")
 Hitbox = NodePath("Hitbox")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c60pkqnoc7oin"]
+[gd_scene load_steps=8 format=3 uid="uid://c60pkqnoc7oin"]
 
 [ext_resource type="Material" uid="uid://cgjr0a588ther" path="res://Materials/Neutral.tres" id="1_a5i0j"]
 [ext_resource type="PackedScene" uid="uid://clshihwqo45e8" path="res://Components/Control Point/ControlPoint.tscn" id="2_b3bo1"]
@@ -12,11 +12,20 @@ size = Vector3(60, 5, 10)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ub37w"]
 size = Vector3(60, 5, 10)
 
-[node name="DeployTemplate" type="Node3D"]
+[sub_resource type="FogMaterial" id="FogMaterial_a5i0j"]
+density = 0.1
+albedo = Color(0.223239, 0.360525, 0.470436, 1)
+
+[sub_resource type="FogMaterial" id="FogMaterial_b3bo1"]
+density = 0.1
+albedo = Color(0.611612, 0.191974, 0.184161, 1)
+
+[node name="Dawn of War" type="Node3D"]
 metadata/_edit_lock_ = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+visible = false
 material_override = ExtResource("1_a5i0j")
 mesh = SubResource("BoxMesh_uxve4")
 metadata/_edit_lock_ = true
@@ -51,3 +60,13 @@ debug_color = Color(0.744991, 0.223239, 0.109422, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 17)
 shape = SubResource("BoxShape3D_ub37w")
 debug_color = Color(0.352697, 0.545174, 0.674632, 1)
+
+[node name="Blu" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 17)
+size = Vector3(60, 6, 10)
+material = SubResource("FogMaterial_a5i0j")
+
+[node name="Red" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -17)
+size = Vector3(60, 6, 10)
+material = SubResource("FogMaterial_b3bo1")

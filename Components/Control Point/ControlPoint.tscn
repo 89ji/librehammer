@@ -46,6 +46,8 @@ shape = SubResource("CylinderShape3D_iyljy")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870504, 0)
+omni_range = 10.0
+omni_shadow_mode = 0
 
 [connection signal="area_entered" from="Hitbox" to="." method="OnHitboxEnter"]
 [connection signal="area_exited" from="Hitbox" to="." method="OnHitboxExit"]

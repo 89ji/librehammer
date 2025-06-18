@@ -1,0 +1,163 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd8aeqe02ixfg"]
+
+[ext_resource type="Script" uid="uid://crai1thpkyicu" path="res://Components/Score Banner/ScoreBanner.cs" id="1_s1nxb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e60g3"]
+
+[node name="ScoreBanner" type="Control" node_paths=PackedStringArray("DefVP", "DefCP", "AtkVP", "AtkCP")]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+script = ExtResource("1_s1nxb")
+DefVP = NodePath("Def VP/RichTextLabel3")
+DefCP = NodePath("Bottom Left Container/def score")
+AtkVP = NodePath("atk vp/RichTextLabel4")
+AtkCP = NodePath("Bottom Right Bar/RichTextLabel2")
+
+[node name="Top Bar" type="MeshInstance2D" parent="."]
+modulate = Color(0.203708, 0.188067, 0.176349, 1)
+position = Vector2(0, 24)
+scale = Vector2(128, 32)
+mesh = SubResource("BoxMesh_e60g3")
+
+[node name="Bottom Left Container" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Bottom Left Bar" type="MeshInstance2D" parent="Bottom Left Container"]
+modulate = Color(0.203708, 0.188067, 0.176349, 1)
+position = Vector2(-34, 64)
+scale = Vector2(60, 32)
+mesh = SubResource("BoxMesh_e60g3")
+
+[node name="cp" type="RichTextLabel" parent="Bottom Left Container"]
+modulate = Color(0.737163, 0.231067, 0.231067, 1)
+layout_mode = 0
+offset_left = -30.0
+offset_top = 56.0
+offset_right = -6.0
+offset_bottom = 78.0
+theme_override_font_sizes/normal_font_size = 10
+text = "CP"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="def score" type="RichTextLabel" parent="Bottom Left Container"]
+layout_mode = 0
+offset_left = -64.0
+offset_top = 48.0
+offset_right = -4.0
+offset_bottom = 80.0
+theme_override_colors/default_color = Color(0.611612, 0.191974, 0.184161, 1)
+theme_override_font_sizes/normal_font_size = 22
+text = "0"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bottom Right Bar" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Bottom Bar2" type="MeshInstance2D" parent="Bottom Right Bar"]
+modulate = Color(0.203708, 0.188067, 0.176349, 1)
+position = Vector2(34, 64)
+scale = Vector2(60, 32)
+mesh = SubResource("BoxMesh_e60g3")
+
+[node name="cp" type="RichTextLabel" parent="Bottom Right Bar"]
+modulate = Color(0.356619, 0.478248, 0.545174, 1)
+layout_mode = 0
+offset_left = 38.0
+offset_top = 56.0
+offset_right = 62.0
+offset_bottom = 78.0
+theme_override_font_sizes/normal_font_size = 10
+text = "CP"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Bottom Right Bar"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 48.0
+offset_right = 64.0
+offset_bottom = 80.0
+theme_override_colors/default_color = Color(0.223239, 0.360525, 0.470436, 1)
+theme_override_font_sizes/normal_font_size = 22
+text = "32"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Def VP" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Def Bkg" type="MeshInstance2D" parent="Def VP"]
+modulate = Color(0.611612, 0.191974, 0.184161, 1)
+position = Vector2(-108, 44)
+scale = Vector2(72, 72)
+mesh = SubResource("BoxMesh_e60g3")
+
+[node name="cp" type="RichTextLabel" parent="Def VP"]
+layout_mode = 0
+offset_left = -98.0
+offset_top = 58.0
+offset_right = -74.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 14
+text = "VP"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Def VP"]
+layout_mode = 0
+offset_left = -144.0
+offset_top = 8.0
+offset_right = -72.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 46
+text = "0"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="atk vp" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Atk Bkg" type="MeshInstance2D" parent="atk vp"]
+modulate = Color(0.223239, 0.360525, 0.470436, 1)
+position = Vector2(108, 44)
+scale = Vector2(72, 72)
+mesh = SubResource("BoxMesh_e60g3")
+
+[node name="cp" type="RichTextLabel" parent="atk vp"]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 58.0
+offset_right = 142.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 14
+text = "VP"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="atk vp"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 80.0
+theme_override_font_sizes/normal_font_size = 46
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1

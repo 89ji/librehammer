@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1tajp2qrsu2v"]
+
+[ext_resource type="ArrayMesh" uid="uid://7bkkr1cnm0p8" path="res://Components/Terrain/Space Station/stairs.obj" id="1_hpanj"]
+[ext_resource type="ArrayMesh" uid="uid://8ypc3w1bvxd7" path="res://Components/Terrain/Space Station/stairs-handrail.obj" id="2_l8pda"]
+[ext_resource type="ArrayMesh" uid="uid://bwhrm0l3jnt7t" path="res://Components/Terrain/Space Station/floor-detail.obj" id="3_tffdc"]
+[ext_resource type="ArrayMesh" uid="uid://dpstw2fvbcd2g" path="res://Components/Terrain/Space Station/floor.obj" id="4_tffdc"]
+[ext_resource type="ArrayMesh" uid="uid://b16exx88samd3" path="res://Components/Terrain/Space Station/floor-corner.obj" id="4_ylody"]
+[ext_resource type="ArrayMesh" uid="uid://c8cu2cua6ufue" path="res://Components/Terrain/Space Station/balcony-rail-center.obj" id="6_bs445"]
+[ext_resource type="ArrayMesh" uid="uid://bjbwexswsrwu8" path="res://Components/Terrain/Space Station/container.obj" id="7_npuxx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ae4ln"]
+radius = 0.277766
+height = 0.752276
+
+[node name="Dust" type="Node3D"]
+
+[node name="Stairs" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_hpanj")
+
+[node name="Stairs-handrail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.004, 0.0747903, 0)
+mesh = ExtResource("2_l8pda")
+
+[node name="Floor-detail" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = ExtResource("3_tffdc")
+
+[node name="Floor-corner" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -2)
+mesh = ExtResource("4_ylody")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+mesh = ExtResource("4_tffdc")
+
+[node name="Floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+mesh = ExtResource("4_tffdc")
+
+[node name="Floor-corner2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+mesh = ExtResource("4_ylody")
+
+[node name="Floor-corner3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, -2)
+mesh = ExtResource("4_ylody")
+
+[node name="Balcony-rail-center" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41018, 0.3, -2.31809)
+mesh = ExtResource("6_bs445")
+
+[node name="Balcony-rail-center2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.488782, 0.3, -2.31809)
+mesh = ExtResource("6_bs445")
+
+[node name="Container" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.859, 0.3, -0.989)
+mesh = ExtResource("7_npuxx")
+
+[node name="Area3D" type="Area3D" parent="Container"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Container/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.251434, 0)
+shape = SubResource("CapsuleShape3D_ae4ln")

@@ -12,11 +12,12 @@ size = Vector3(18, 5, 44)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ub37w"]
 size = Vector3(18, 5, 44)
 
-[node name="DeployTemplate" type="Node3D"]
+[node name="Hammer and Anvil" type="Node3D"]
 metadata/_edit_lock_ = true
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+visible = false
 material_override = ExtResource("1_3f7bt")
 mesh = SubResource("BoxMesh_uxve4")
 metadata/_edit_lock_ = true
