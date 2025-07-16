@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://by8n5x1a7fl0s"]
 
-[ext_resource type="Script" uid="uid://bsbqc4cbq10tm" path="res://Components/Next Phase Button/NextPhaseButton.cs" id="1_nmibg"]
+[ext_resource type="Script" uid="uid://bsbqc4cbq10tm" path="res://UI/Next Phase Button/NextPhaseButton.cs" id="1_nmibg"]
 
 [node name="NextPhaseButton" type="Button"]
 anchors_preset = 3

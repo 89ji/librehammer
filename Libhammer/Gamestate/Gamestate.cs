@@ -15,7 +15,7 @@ public class Gamestate
     // State managers
     public PhaseManager PhaseMan;
     public readonly Controlpoint[] Objective = new Controlpoint[5];
-    
+
     // Stuff for external resolvers
     public IDistanceProvider DistanceProvider;
     public IEngagementProvider EngagementProvider;
@@ -116,6 +116,15 @@ public class Gamestate
         {
             ChoosingPlayer.isDefender = true; ;
             OtherPlayer.isDefender = false;
+        }
+    }
+
+    public void SetMissionRule(MissionRule missionRule)
+    {
+        // If the mission slot is occupied, deregister its actions
+        if (missionRule != null)
+        {
+            
         }
     }
 }

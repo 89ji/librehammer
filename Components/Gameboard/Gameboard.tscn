@@ -1,17 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://dd1mqfgn4c516"]
+[gd_scene load_steps=17 format=3 uid="uid://dd1mqfgn4c516"]
 
 [ext_resource type="Script" uid="uid://drv0nn144yk3r" path="res://Components/Gameboard/Gameboard.cs" id="1_rltof"]
-[ext_resource type="PackedScene" uid="uid://2a6nnrfibccv" path="res://Components/Phase Clock/TurnClock.tscn" id="2_0dao1"]
+[ext_resource type="PackedScene" uid="uid://2a6nnrfibccv" path="res://UI/Phase Clock/TurnClock.tscn" id="2_0dao1"]
 [ext_resource type="PackedScene" uid="uid://bs515nok7sxst" path="res://Components/Troop/Troop.tscn" id="2_46b28"]
-[ext_resource type="PackedScene" uid="uid://by8n5x1a7fl0s" path="res://Components/Next Phase Button/NextPhaseButton.tscn" id="2_kv0md"]
+[ext_resource type="PackedScene" uid="uid://by8n5x1a7fl0s" path="res://UI/Next Phase Button/NextPhaseButton.tscn" id="2_kv0md"]
 [ext_resource type="PackedScene" uid="uid://cacp5vhvhcpkc" path="res://Components/Deployments/DeployTemplate.tscn" id="3_46b28"]
+[ext_resource type="PackedScene" uid="uid://bc3eyvlpdmiv6" path="res://Components/Movement Manager/Movement Manager.tscn" id="3_lc566"]
 [ext_resource type="Material" uid="uid://bjs1e0kvl7sqp" path="res://Materials/Degraded Concrete/Degraded Concrete.tres" id="3_mlk47"]
 [ext_resource type="PackedScene" uid="uid://jtubr52816ru" path="res://Components/Camera/Camera.tscn" id="3_ys33f"]
-[ext_resource type="PackedScene" uid="uid://bd8aeqe02ixfg" path="res://Components/Score Banner/Score Banner.tscn" id="4_4g1ay"]
+[ext_resource type="PackedScene" uid="uid://bd8aeqe02ixfg" path="res://UI/Score Banner/Score Banner.tscn" id="4_4g1ay"]
 [ext_resource type="PackedScene" uid="uid://d1tajp2qrsu2v" path="res://Components/Terrain/Space Station/Dust.tscn" id="8_coedc"]
+[ext_resource type="PackedScene" uid="uid://daidr68sgwfkt" path="res://UI/Rules and Objectives/Rules and Objectives.tscn" id="9_fmeyv"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_coedc"]
 material = ExtResource("3_mlk47")
+size = Vector3(60, 0.5, 44)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1pekv"]
 size = Vector3(60, 0.5, 44)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0dao1"]
@@ -30,14 +35,14 @@ glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1pekv"]
-size = Vector3(60, 0.5, 44)
-
 [node name="Gameboard" type="Node3D" node_paths=PackedStringArray("TroopGroup", "deployTemplate")]
 script = ExtResource("1_rltof")
 Gametroop = ExtResource("2_46b28")
 TroopGroup = NodePath("Troop Group")
 deployTemplate = NodePath("DeployTemplate")
+
+[node name="MovementManager" parent="." node_paths=PackedStringArray("cam") instance=ExtResource("3_lc566")]
+cam = NodePath("../Camera")
 
 [node name="Camera" parent="." instance=ExtResource("3_ys33f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
@@ -47,6 +52,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 mesh = SubResource("BoxMesh_coedc")
 metadata/_edit_lock_ = true
 
+[node name="Floor Hitbox" type="StaticBody3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+collision_layer = 8
+collision_mask = 0
+
+[node name="Floor Shape" type="CollisionShape3D" parent="Floor/Floor Hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_1pekv")
+
 [node name="DeployTemplate" parent="." instance=ExtResource("3_46b28")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -54,16 +68,13 @@ environment = SubResource("Environment_rltof")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(0.769693, 0.366841, 0.522495, -0.637611, 0.400686, 0.657954, 0.0320081, -0.839571, 0.542307, 0, 15.1058, 0)
-light_energy = 0.5
-light_indirect_energy = 0.5
-
-[node name="Floor Hitbox" type="StaticBody3D" parent="."]
-
-[node name="Floor Shape" type="CollisionShape3D" parent="Floor Hitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-shape = SubResource("BoxShape3D_1pekv")
+light_color = Color(0.992172, 0.843183, 0.419638, 1)
+shadow_enabled = true
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="RulesAndObjectives" parent="UI" node_paths=PackedStringArray("board") instance=ExtResource("9_fmeyv")]
+board = NodePath("../..")
 
 [node name="ScoreBanner" parent="UI" node_paths=PackedStringArray("board") instance=ExtResource("4_4g1ay")]
 board = NodePath("../..")

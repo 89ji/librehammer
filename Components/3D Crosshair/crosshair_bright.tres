@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c8bc67ghor3w5"]
+
+[resource]
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(1, 0.533352, 0.0878972, 1)
+rim_enabled = true

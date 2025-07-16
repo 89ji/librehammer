@@ -1,6 +1,9 @@
 using Godot;
 using LibHammer.Gamestate;
 using LibHammer.Gamestate.Serviceproviders;
+using LibHammer.Primaries;
+using LibHammer.Secondaries.Fixed;
+using LibHammer.Secondaries.Tactical;
 using System;
 using System.Collections.Generic;
 
@@ -22,14 +25,13 @@ public partial class Gameboard : Node3D
 
 	public Gamestate State = new();
 
+	public Dictionary<BoardTroop, GameTroop> troop2node = new();
+
 	/// <summary>
 	///  At this point, armies and players should be setup
 	/// </summary>
 	public override void _Ready()
 	{
-		// Making a node for each troop
-		Dictionary<BoardTroop, GameTroop> troop2node = new();
-
 		foreach (BoardTroop troop in State.Player1.Army)
 		{
 			var btr = Gametroop.Instantiate<GameTroop>();
@@ -68,7 +70,13 @@ public partial class Gameboard : Node3D
 
 		var chooser = State.GetChoosingPlayer();
 		State.ChooseRole(true);
-		NextPhase();
+
+		State.Primary = new TakeAndHold();
+		State.Player1.Secondaries[0] = new Assassination();
+		State.Player1.Secondaries[1] = new BehindEnemyLines();
+
+		State.Player2.Secondaries[0] = new NoPrisoners();
+		State.Player2.Secondaries[1] = new SecureNoMansLand();
 	}
 
 

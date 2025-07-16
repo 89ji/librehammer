@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bd8aeqe02ixfg"]
 
-[ext_resource type="Script" uid="uid://crai1thpkyicu" path="res://Components/Score Banner/ScoreBanner.cs" id="1_s1nxb"]
+[ext_resource type="Script" uid="uid://crai1thpkyicu" path="res://UI/Score Banner/ScoreBanner.cs" id="1_s1nxb"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_e60g3"]
 

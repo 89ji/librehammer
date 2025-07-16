@@ -13,7 +13,8 @@ public partial class NextPhaseButton : Button
 
     public override void _Process(double delta)
     {
-        if (state.PhaseMan.CurrentPhase == Phase.Fight) Text = "Next Turn";
-        else Text = $"To {state.PhaseMan.CurrentPhase} Phase";
+        if (state.PhaseMan.GetNextPhase() == Phase.Postgame) Text = "End Game";
+        else if (state.PhaseMan.GetNextPhase() == Phase.Command) Text = "Next Turn";
+        else Text = $"To {state.PhaseMan.GetNextPhase()} Phase";
     }
 }

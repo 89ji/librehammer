@@ -1,4 +1,5 @@
 using Godot;
+using LibHammer.Structs;
 using System;
 
 public partial class Camera : Marker3D
@@ -8,22 +9,49 @@ public partial class Camera : Marker3D
 	[Export] float fovAdjustInterval;
 	[Export] Camera3D camera;
 	[Export] RayCast3D ray;
+	[Export] RichTextLabel crosshair;
+	[Export] Node3D crosshair3d;
+	[Export] Node3D positionMarker;
 
 	[Export] float moveSpeed = 16f;
 	[Export] float sprintMultiplier = 1.5f;
 	[Export] float xSpeed;
 	[Export] float ySpeed;
 
+	public GameTroop SelectedTroop;
+	public GameTroop HoveredTroop;
+	public Vector3? SelectedLocation;
+	public Vector3? HoveredLocation;
+
 	Vector2 lastMousePosition;
+	Gameboard board;
+
+	[Signal] public delegate void SelectedTroopUpdatedEventHandler();
+	[Signal] public delegate void SelectedLocationUpdatedEventHandler();
+
+	public override void _Ready()
+	{
+		// Finding the game board
+		board = GetParent<Gameboard>();
+	}
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("move_camera")) lastMousePosition = GetViewport().GetMousePosition();
+		if (Input.IsActionJustPressed("move_camera"))
+		{
+			lastMousePosition = GetViewport().GetMousePosition();
+			crosshair.Show();
+		}
 
 		if (Input.IsActionPressed("move_camera")) Input.MouseMode = Input.MouseModeEnum.Captured;
 		else Input.MouseMode = Input.MouseModeEnum.Visible;
-		
-		if (Input.IsActionJustReleased("move_camera")) GetViewport().WarpMouse(lastMousePosition);
+
+		if (Input.IsActionJustReleased("move_camera"))
+		{
+			GetViewport().WarpMouse(lastMousePosition);
+			crosshair.Hide();
+		}
+
 
 		Vector3 movement = new();
 
@@ -47,26 +75,63 @@ public partial class Camera : Marker3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		RaycastToMouse();
-	}
+		CalculateHover();
 
-	void RaycastToMouse()
-	{
-		Vector2 mousePos = GetViewport().GetMousePosition();
-
-		Vector3 from = camera.ProjectRayOrigin(mousePos);
-		Vector3 to = from + camera.ProjectRayNormal(mousePos) * 1000f;
-
-		ray.GlobalPosition = from;
-		ray.TargetPosition = to - from;
-		ray.ForceRaycastUpdate();
-
-		if (ray.IsColliding())
+		if (GD.Randf() < .1)
 		{
-			GD.Print("Hit: ", ray.GetCollider());
-			GD.Print("Position: ", ray.GetCollisionPoint());
+			var selName = SelectedTroop == null ? "none" : SelectedTroop.Troop.Stats.Name;
+			var hovName = HoveredTroop == null ? "none" : HoveredTroop.Troop.Stats.Name;
+
+			GD.Print($"Selected Troop: {selName}\nHovered Troop: {hovName}\n");
 		}
 	}
+
+	void CalculateHover()
+	{
+		crosshair3d.Hide();
+
+		HoveredTroop = null;
+		HoveredLocation = null;
+
+		var selectedObj = ray.GetCollider();
+		if (selectedObj == null) return;
+
+		// Assumes the direct parent of an area is a troop, but checks
+		if (selectedObj is Area3D area)
+		{
+			var parent = area.GetParent();
+			if (parent is GameTroop troop) TroopHover(troop);
+			else TerrainHover();
+		}
+
+		else if (selectedObj is StaticBody3D body) TerrainHover();
+	}
+
+	void TroopHover(GameTroop troop)
+	{
+		HoveredTroop = troop;
+		if (Input.IsActionJustPressed("select"))
+		{
+			SelectedTroop = troop;
+			EmitSignal(SignalName.SelectedTroopUpdated);
+		}
+	}
+
+	void TerrainHover()
+	{
+		crosshair3d.Show();
+
+		var position = ray.GetCollisionPoint();
+		HoveredLocation = position;
+		crosshair3d.Position = position;
+		if (Input.IsActionJustPressed("select"))
+		{
+			SelectedLocation = position;
+			positionMarker.Position = position;
+			EmitSignal(SignalName.SelectedLocationUpdated);
+		}
+	}
+
 
 	public override void _Input(InputEvent vent)
 
@@ -90,7 +155,7 @@ public partial class Camera : Marker3D
 		{
 			camera.RotateX(-motion.Relative.Y * ySpeed * .002f);
 			var rot = camera.RotationDegrees;
-			rot.X = Mathf.Clamp(rot.X, -80f, 0f);
+			rot.X = Mathf.Clamp(rot.X, -75f, 0f);
 			camera.RotationDegrees = rot;
 
 			RotateY(-motion.Relative.X * xSpeed * .002f);

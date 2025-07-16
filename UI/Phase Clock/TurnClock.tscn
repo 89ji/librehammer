@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://2a6nnrfibccv"]
 
-[ext_resource type="Texture2D" uid="uid://cesfhqsqnfol3" path="res://Components/Phase Clock/charge.png" id="1_1korp"]
-[ext_resource type="Script" uid="uid://buwtpag0odt44" path="res://Components/Phase Clock/TurnClock.cs" id="1_evwnh"]
-[ext_resource type="Texture2D" uid="uid://dcul2w820qhqn" path="res://Components/Phase Clock/cmd.png" id="2_4vvbw"]
-[ext_resource type="Texture2D" uid="uid://c1ywmxplnrvrl" path="res://Components/Phase Clock/fight.png" id="3_evwnh"]
-[ext_resource type="Texture2D" uid="uid://b23rpyrhdshne" path="res://Components/Phase Clock/move.png" id="4_hing2"]
-[ext_resource type="Texture2D" uid="uid://dxyi1bp6d74bc" path="res://Components/Phase Clock/shoot.png" id="5_kqipe"]
+[ext_resource type="Texture2D" uid="uid://cesfhqsqnfol3" path="res://UI/Phase Clock/charge.png" id="1_1korp"]
+[ext_resource type="Script" uid="uid://buwtpag0odt44" path="res://UI/Phase Clock/TurnClock.cs" id="1_evwnh"]
+[ext_resource type="Texture2D" uid="uid://dcul2w820qhqn" path="res://UI/Phase Clock/cmd.png" id="2_4vvbw"]
+[ext_resource type="Texture2D" uid="uid://c1ywmxplnrvrl" path="res://UI/Phase Clock/fight.png" id="3_evwnh"]
+[ext_resource type="Texture2D" uid="uid://b23rpyrhdshne" path="res://UI/Phase Clock/move.png" id="4_hing2"]
+[ext_resource type="Texture2D" uid="uid://dxyi1bp6d74bc" path="res://UI/Phase Clock/shoot.png" id="5_kqipe"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vvbw"]
 bg_color = Color(1, 1, 1, 1)
