@@ -13,7 +13,7 @@ public class BoardTroop
 
     // Movement stuffs
     public MoveStatus MoveState = MoveStatus.Pending;
-    public int AvailableMovement = 0;
+    public float AvailableMovement = 0;
 
     // Shooting stuffs
     public bool ShootingEligible = true;

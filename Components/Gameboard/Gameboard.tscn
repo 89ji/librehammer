@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dd1mqfgn4c516"]
+[gd_scene load_steps=18 format=3 uid="uid://dd1mqfgn4c516"]
 
 [ext_resource type="Script" uid="uid://drv0nn144yk3r" path="res://Components/Gameboard/Gameboard.cs" id="1_rltof"]
 [ext_resource type="PackedScene" uid="uid://2a6nnrfibccv" path="res://UI/Phase Clock/TurnClock.tscn" id="2_0dao1"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bd8aeqe02ixfg" path="res://UI/Score Banner/Score Banner.tscn" id="4_4g1ay"]
 [ext_resource type="PackedScene" uid="uid://d1tajp2qrsu2v" path="res://Components/Terrain/Space Station/Dust.tscn" id="8_coedc"]
 [ext_resource type="PackedScene" uid="uid://daidr68sgwfkt" path="res://UI/Rules and Objectives/Rules and Objectives.tscn" id="9_fmeyv"]
+[ext_resource type="PackedScene" uid="uid://dy4wgsphpjyoj" path="res://UI/Unit Popup/UnitPopup.tscn" id="12_2byyj"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_coedc"]
 material = ExtResource("3_mlk47")
@@ -41,8 +42,9 @@ Gametroop = ExtResource("2_46b28")
 TroopGroup = NodePath("Troop Group")
 deployTemplate = NodePath("DeployTemplate")
 
-[node name="MovementManager" parent="." node_paths=PackedStringArray("cam") instance=ExtResource("3_lc566")]
+[node name="MovementManager" parent="." node_paths=PackedStringArray("cam", "popup") instance=ExtResource("3_lc566")]
 cam = NodePath("../Camera")
+popup = NodePath("../UI/UnitPopup")
 
 [node name="Camera" parent="." instance=ExtResource("3_ys33f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
@@ -74,6 +76,7 @@ shadow_enabled = true
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="RulesAndObjectives" parent="UI" node_paths=PackedStringArray("board") instance=ExtResource("9_fmeyv")]
+visible = false
 board = NodePath("../..")
 
 [node name="ScoreBanner" parent="UI" node_paths=PackedStringArray("board") instance=ExtResource("4_4g1ay")]
@@ -85,6 +88,16 @@ board = NodePath("../..")
 board = NodePath("../..")
 Defender = Color(0.611612, 0.191974, 0.184161, 1)
 Attacker = Color(0.223239, 0.360525, 0.470436, 1)
+
+[node name="UnitPopup" parent="UI" instance=ExtResource("12_2byyj")]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_top = -189.0
+offset_right = -152.0
+offset_bottom = -189.0
+grow_horizontal = 0
 
 [node name="Troop Group" type="Node3D" parent="."]
 metadata/_edit_lock_ = true

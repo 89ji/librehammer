@@ -10,6 +10,6 @@ class ViewClearanceResolver : IViewClearanceProvider
 
     public ViewClearance DetermineVisibility(BoardTroop from, BoardTroop to)
     {
-        return troops[from].CalculateView(troops[from]);
+        return troops[from].CalculateView(troops[to]);
     }
 }

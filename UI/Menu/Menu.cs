@@ -12,10 +12,10 @@ public partial class Menu : Control
         Gameboard board = Gameboard.Instantiate<Gameboard>();
 
         List<Troop> p1_armee = new();
-        p1_armee.Add(new Troop { Name = "blone", Toughness = 9000, ObjectiveControl = 5});
+        p1_armee.Add(new Troop { Name = "blone", Movement = 10, Toughness = 12, ArmorSave = 3, Wounds = 22, Leadership = 6, ObjectiveControl = 5 });
 
         List<Troop> p2_armee = new();
-        p2_armee.Add(new Troop { Name = "megablone", Toughness = 1 ,  ObjectiveControl = 4});
+        p2_armee.Add(new Troop { Name = "megablone", Movement = 6, Toughness = 5, ArmorSave = 5, Wounds = 1, Leadership = 7, ObjectiveControl = 2 });
 
         board.State.InsertArmy(p1_armee, "Jocelyn");
         board.State.InsertArmy(p2_armee, "snas");

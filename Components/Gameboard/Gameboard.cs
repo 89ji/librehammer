@@ -86,7 +86,7 @@ public partial class Gameboard : Node3D
 
 		foreach (var obj in State.Objective)
 		{
-			GD.Print(obj.GetInfluence());
+			//GD.Print(obj.GetInfluence());
 		}
 	}
 }

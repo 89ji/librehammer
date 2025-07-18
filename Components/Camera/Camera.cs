@@ -82,7 +82,7 @@ public partial class Camera : Marker3D
 			var selName = SelectedTroop == null ? "none" : SelectedTroop.Troop.Stats.Name;
 			var hovName = HoveredTroop == null ? "none" : HoveredTroop.Troop.Stats.Name;
 
-			GD.Print($"Selected Troop: {selName}\nHovered Troop: {hovName}\n");
+			//GD.Print($"Selected Troop: {selName}\nHovered Troop: {hovName}\n");
 		}
 	}
 

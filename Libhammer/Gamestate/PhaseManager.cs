@@ -62,12 +62,29 @@ public class PhaseManager
 			foreach (BoardTroop troop in state.PhaseMan.ActivePlayer.Army)
 			{
 				troop.MoveState = MoveStatus.Pending;
-				troop.AvailableMovement = 0;
+				troop.AvailableMovement = troop.Stats.Movement;
 			}
 		}
 		};
 
 		CommonActions.AddAction(preMove);
+
+		// Managing pre movement step actions
+		InterphaseAction postMove = new InterphaseAction
+		{
+			Name = "After the movement phase",
+			Where = Interphase.PostMove,
+			Action = (state, phase) =>
+		{
+			// Reseting last turns move status
+			foreach (BoardTroop troop in state.PhaseMan.ActivePlayer.Army)
+			{
+				if (troop.MoveState == MoveStatus.Pending) troop.MoveState = MoveStatus.Stationary;
+			}
+		}
+		};
+
+		CommonActions.AddAction(postMove);
 
 
 		// Managing pre shooting phase actions
